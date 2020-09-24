@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 const crypto = require('crypto');
-const uuidv1 = require('uuid/v1');
+const uuidv1  = require('uuidv1');
 
 
 const userSchema = new mongoose.Schema({
+
         name: {
             type: String,
             trim: true,
@@ -15,12 +16,12 @@ const userSchema = new mongoose.Schema({
             type: String,
             trim: true,
             required: true,
-            unique: 32
+            unique: true
         },
 
         hashed_password: {
             type: String,
-            required: true,
+            required: true
         },
 
         about: {
@@ -49,7 +50,7 @@ const userSchema = new mongoose.Schema({
 userSchema.virtual('password')
 .set(function(password){
     this._password = password
-    this.salt = uuidv1()
+    this.salt = uuidv1();
     this.hashed_password = this.encryptPassword(password)
 })
 
@@ -57,7 +58,7 @@ userSchema.virtual('password')
     return this._password
 })
 
-userSchema.method = {
+userSchema.methods = {
     encryptPassword: function(password){
         if(!password) return "";
         try {
