@@ -35,5 +35,5 @@
     ]
   },
   "proxy": "http://localhost:4567",
-  "sucure":false
+  "sucure": false
 }
